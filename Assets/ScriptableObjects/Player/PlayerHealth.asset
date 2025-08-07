@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatusType: 1
   curValue: 0
-  MaxValue: 0
+  MaxValue: 100
   MinValue: 0

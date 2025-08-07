@@ -5,7 +5,6 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody _rigidbody;
 
-
     [Header("Player Movement")]
     [SerializeField] float _movementSpeed;
     [HideInInspector]public float MovementSpeed { get => _movementSpeed; }
@@ -57,7 +56,6 @@ public class PlayerController : MonoBehaviour
             _rigidbody.AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
         }
     }
-
     //Input Actions End
 
     //Player Actions

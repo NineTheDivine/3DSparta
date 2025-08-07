@@ -36,16 +36,9 @@ public abstract class Entity : MonoBehaviour, IDamageable
         Health.SubtractValue(amount);
         if (Health.curValue <= 0)
             OnDead();
-        else
-            OnDamaged(amount);
     }
 
     abstract public void OnDead();
-
-    virtual public void OnDamaged(int amount) 
-    {
-        eventBus.InvokeEvent(GetStatusByType(StatusType.Health), amount);
-    }
 
     public Status GetStatusByType(StatusType statusType)
     {

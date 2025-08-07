@@ -20,6 +20,8 @@ public class StatusUI : MonoBehaviour
         if (statusType == StatusType.None)
             throw new MissingFieldException("Undefined Status in StatusUI");
         status = this.entity.GetStatusByType(statusType);
+        if (status.MaxValue == 0)
+            throw new NotImplementedException("Status max value is 0");
         StatusActions = OnStatusChanged;
         this.entity.eventBus.SubscribeStatusChange(status, StatusActions);
 
