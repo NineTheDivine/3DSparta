@@ -123,6 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,6 +448,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1946104934}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+
 --- !u!23 &1608849307
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -497,6 +499,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608849304}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+
 --- !u!1 &1886101053
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +532,7 @@ Transform:
   - {fileID: 1337779806}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+
 --- !u!1 &1946104932
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,7 +678,7 @@ MonoBehaviour:
   _jumpPower: 80
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   cameraContainer: {fileID: 963194228}
   minLook: -80
   maxLook: 80
