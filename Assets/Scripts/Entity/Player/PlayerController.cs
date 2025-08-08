@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float movementSpeedMultiplier = 1.0f;
     [HideInInspector]public float MovementSpeed { get => _movementSpeed; }
     Vector2 currentMovementInput;
+    Vector3 prevdir = Vector3.zero;
     [SerializeField] float _jumpPower;
     [HideInInspector]public float JumpPower { get => _jumpPower; }
     [SerializeField] LayerMask groundLayerMask;
@@ -62,12 +63,11 @@ public class PlayerController : MonoBehaviour
     //Player Actions
     void Move()
     {
-        Vector3 dir = transform.forward * currentMovementInput.y + transform.right * currentMovementInput.x;
-        dir = dir * _movementSpeed * movementSpeedMultiplier;
-        dir.y = _rigidbody.velocity.y;
-
-        _rigidbody.velocity = dir;
+        Vector3 curdir = transform.forward * currentMovementInput.y + transform.right * currentMovementInput.x;
+        curdir = curdir * _movementSpeed * movementSpeedMultiplier * Time.fixedDeltaTime;
+        _rigidbody.position += curdir;
     }
+
     void Look()
     {
         cameraXRotation += mouseDelta.y * lookSensitivity;
