@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Movement")]
     [SerializeField] float _movementSpeed;
+    public float movementSpeedMultiplier = 1.0f;
     [HideInInspector]public float MovementSpeed { get => _movementSpeed; }
     Vector2 currentMovementInput;
     [SerializeField] float _jumpPower;
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         Vector3 dir = transform.forward * currentMovementInput.y + transform.right * currentMovementInput.x;
-        dir = dir * _movementSpeed;
+        dir = dir * _movementSpeed * movementSpeedMultiplier;
         dir.y = _rigidbody.velocity.y;
 
         _rigidbody.velocity = dir;
