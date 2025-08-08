@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 curdir = transform.forward * currentMovementInput.y + transform.right * currentMovementInput.x;
         curdir = curdir * _movementSpeed * movementSpeedMultiplier * Time.fixedDeltaTime;
-        _rigidbody.position += curdir;
+        _rigidbody.MovePosition(transform.position + curdir);
     }
 
     void Look()
