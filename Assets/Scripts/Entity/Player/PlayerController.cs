@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     [Header("Player Movement")]
     [SerializeField] float _movementSpeed;
     public float movementSpeedMultiplier = 1.0f;
-    [HideInInspector]public float MovementSpeed { get => _movementSpeed; }
+    [HideInInspector]public float PlayerFowardMovement 
+    { get => currentMovementInput.y * _movementSpeed * movementSpeedMultiplier > 0 ? currentMovementInput.y * _movementSpeed * movementSpeedMultiplier : 0; }
     Vector2 currentMovementInput;
     Vector3 prevdir = Vector3.zero;
     [SerializeField] float _jumpPower;

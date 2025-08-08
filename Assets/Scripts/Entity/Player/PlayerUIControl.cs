@@ -10,7 +10,7 @@ public class PlayerUIControl : MonoBehaviour
 
     public void Init()
     {
-        Player player = PlayerManager.Instance.player;
+        Player player = transform.parent.GetComponent<Player>();
         PlayerStatusParent = new GameObject("PlayerStatusUI").AddComponent<Canvas>();
         PlayerStatusParent.transform.SetParent(transform);
         if (!PlayerStatusParent.TryGetComponent<RectTransform>(out RectTransform rect))

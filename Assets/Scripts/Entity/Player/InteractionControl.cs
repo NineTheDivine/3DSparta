@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InteractionControl : MonoBehaviour
 {
-    Player player;
+    IGrab grabber;
     const float UPDATEDELAY = 0.05f;
     float lastUpdate = 0.0f;
     const float DETECTDISTANCE = 1.0f;
@@ -22,7 +22,7 @@ public class InteractionControl : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        grabber = GetComponent<IGrab>();
         cam = Camera.main;
         RectTransform crosshair = new GameObject("CrossHairUI").AddComponent<RectTransform>();
         crosshair.transform.SetParent(UIParent);
@@ -64,19 +64,19 @@ public class InteractionControl : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             //Set Player Grab mode
-            player.ActiveGrab(true);
+            grabber.OnGrabEnter();
             //If current Interactable is not null, Grab
-            if(player.grabObject == null && currentGrabable != null)
-                player.grabObject = currentGrabable;
+            if(grabber.grabObject == null && currentGrabable != null)
+                grabber.grabObject = currentGrabable;
         }
-        else if (player.grabObject == null && currentGrabable != null && context.phase == InputActionPhase.Performed)
+        else if (grabber.grabObject == null && currentGrabable != null && context.phase == InputActionPhase.Performed)
         {
-            player.grabObject= currentGrabable;
+            grabber.grabObject= currentGrabable;
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             //End Player Grab mode
-            player.ActiveGrab(false);
+            grabber.OnGrabExit();
         }
     }
 }
