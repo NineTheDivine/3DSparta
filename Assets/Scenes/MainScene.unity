@@ -942,11 +942,55 @@ PrefabInstance:
       value: DebugModule
       objectReference: {fileID: 0}
     - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 1da58a35269b1da4096f1a95dddc8c0d, type: 3}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Debug
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 1
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_ActionId
+      value: a97aece0-2e39-4eda-b7a5-158071ae1747
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionId
+      value: 7e2549dd-65d0-4d5b-bb2c-6f8ecfc0ebea
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionId
+      value: 5ba9c35a-304e-4c12-b242-57ab9d677ab4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: b5c1e3f0-8c49-49ac-9057-d02ef1cebba7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_ActionName
+      value: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionName
+      value: Player/Jump[/Keyboard/space]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionName
+      value: Player/Look[/Mouse/delta]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: Debug/DebugAction[/Keyboard/k]
       objectReference: {fileID: 0}
     - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
@@ -954,7 +998,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 481963208}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 481963208}
     - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
@@ -962,7 +1014,15 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnDebugAction
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnDebugAction
       objectReference: {fileID: 0}
     - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
@@ -970,7 +1030,15 @@ PrefabInstance:
       value: DebugModule, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DebugModule, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270396290843507459, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8699648323038210561, guid: fcf6324f1bc79424e8663945c85db2a2, type: 3}
