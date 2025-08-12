@@ -9,11 +9,13 @@ public class ItemPool : MonoBehaviour
     public int itemCount;
     public int activateNumber = 0;
 
+
     public void Start()
     {
         for (int i = 0; i < itemCount; i++)
         {
-            ItemObject item = Instantiate(itemObjectPrefab, transform);
+            ItemObject item = Instantiate(itemObjectPrefab);
+            item.transform.SetParent(transform);
             item.parentPool = this;
             item.gameObject.SetActive(false);
         }
@@ -53,5 +55,10 @@ public class ItemPool : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+    }
+
+    public Sprite GetItemIcon()
+    {
+        return itemObjectPrefab.itemInfo.ItemIcon;
     }
 }

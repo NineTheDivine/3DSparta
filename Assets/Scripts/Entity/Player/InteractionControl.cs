@@ -18,7 +18,7 @@ public class InteractionControl : MonoBehaviour
     [Header("Interactables")]
     [SerializeField] LayerMask itemLayer;
     IGrabable currentGrabable;
-    ItemObject currentItemObject;
+    IInteractable currentInteractObject;
     
 
     private void Awake()
@@ -51,18 +51,18 @@ public class InteractionControl : MonoBehaviour
             }
             else
                 currentGrabable = null;
-            if (hit.collider.gameObject.TryGetComponent<ItemObject>(out ItemObject itemtarget))
+            if (hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable itemtarget))
             {
-                if (itemtarget != currentItemObject)
-                    currentItemObject = itemtarget;
+                if (itemtarget != currentInteractObject)
+                    currentInteractObject = itemtarget;
             }
             else
-                currentItemObject = null;
+                currentInteractObject = null;
         }
         else
         {
             currentGrabable = null;
-            currentItemObject = null;
+            currentInteractObject = null;
         }
     }
 
@@ -87,13 +87,13 @@ public class InteractionControl : MonoBehaviour
         }
     }
 
-    public void OnCollectInput(InputAction.CallbackContext context)
+    public void OnInteractInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
         {
             //If current Interactable is not null, add to Inventory
-            if (currentItemObject != null)
-                PlayerManager.Instance.player.inventory.CollectItem(currentItemObject);
+            if (currentInteractObject != null)
+                currentInteractObject.OnInteract();
         }
     }
 }
