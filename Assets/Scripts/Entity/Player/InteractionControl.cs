@@ -31,7 +31,7 @@ public class InteractionControl : MonoBehaviour
         crosshair.transform.SetParent(UIParent);
         crosshair.gameObject.AddComponent<Image>().sprite = crosshairImg;
         crosshair.gameObject.GetComponent<Image>().color = Color.red;
-        crosshair.localScale = Vector2.one * 0.1f;
+        crosshair.localScale = Vector2.one * 0.2f;
         crosshair.anchoredPosition = Vector3.zero;
         midPos = new Vector3(Screen.width / 2, Screen.height / 2);
     }
