@@ -7,6 +7,7 @@ public class Player : Entity, IAttackable
     [HideInInspector] public PlayerController controller;
     public PlayerUIControl playerUIControl;
     [HideInInspector] public IGrab playerGrabber;
+     public PlayerInventory inventory;
     
 
     override protected void Awake()
@@ -25,6 +26,7 @@ public class Player : Entity, IAttackable
 
     public override void OnDead()
     {
+        base.OnDead();
         Debug.Log("Player Dead");
     }
 }

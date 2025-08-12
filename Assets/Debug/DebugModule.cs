@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class DebugModule : MonoBehaviour
 {
     [SerializeField] bool ActiveDebug = false;
+    [SerializeField] GameObject testobject;
     DebugManager debugManager;
     private void Awake()
     {
@@ -34,10 +35,11 @@ public class DebugModule : MonoBehaviour
     /* Implement Test Codes Here */
     private void DoAction()
     {
-        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        if (player == null)
-            throw new MissingComponentException("Player not found");
-        player.TakeDamage(5);
+        ItemPool pool =  testobject.GetComponent<ItemPool>();
+        if (pool != null)
+        {
+            pool.SpawnObject(Vector3.zero);
+        }
     }
 
 

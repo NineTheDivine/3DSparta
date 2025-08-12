@@ -18,6 +18,7 @@ public class InteractionControl : MonoBehaviour
     [Header("Interactables")]
     [SerializeField] LayerMask itemLayer;
     IGrabable currentGrabable;
+    ItemObject currentItemObject;
     
 
     private void Awake()
@@ -43,23 +44,29 @@ public class InteractionControl : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, DETECTDISTANCE, itemLayer))
         {
-            if (hit.collider.gameObject.TryGetComponent<IGrabable>(out IGrabable target))
+            if (hit.collider.gameObject.TryGetComponent<IGrabable>(out IGrabable grabtarget))
             {
-                if (target != currentGrabable)
-                    currentGrabable = target;
+                if (grabtarget != currentGrabable)
+                    currentGrabable = grabtarget;
             }
             else
-            {
                 currentGrabable = null;
+            if (hit.collider.gameObject.TryGetComponent<ItemObject>(out ItemObject itemtarget))
+            {
+                if (itemtarget != currentItemObject)
+                    currentItemObject = itemtarget;
             }
+            else
+                currentItemObject = null;
         }
         else
         {
             currentGrabable = null;
+            currentItemObject = null;
         }
     }
 
-    public void OnInteractionInput(InputAction.CallbackContext context)
+    public void OnGrabInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
         {
@@ -77,6 +84,16 @@ public class InteractionControl : MonoBehaviour
         {
             //End Player Grab mode
             grabber.OnGrabExit();
+        }
+    }
+
+    public void OnCollectInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            //If current Interactable is not null, add to Inventory
+            if (currentItemObject != null)
+                PlayerManager.Instance.player.inventory.CollectItem(currentItemObject);
         }
     }
 }

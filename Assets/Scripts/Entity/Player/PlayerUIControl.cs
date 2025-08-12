@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerUIControl : MonoBehaviour
 {
     Canvas PlayerStatusParent;
-    [SerializeField]StatusUI playerStatusUIPrefab;
+    [SerializeField] StatusUI playerStatusUIPrefab;
+    [SerializeField] PlayerInventory playerInventoryPrefab;
 
     public void Init()
     {
@@ -24,5 +25,7 @@ public class PlayerUIControl : MonoBehaviour
             StatusUI statusUI = Instantiate(playerStatusUIPrefab, PlayerStatusParent.transform);
             statusUI.Init(player);
         }
+        player.inventory = Instantiate(playerInventoryPrefab, this.transform);
+        player.inventory.gameObject.SetActive(false);
     }
 }

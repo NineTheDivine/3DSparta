@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class Entity : MonoBehaviour, IDamageable
@@ -13,6 +14,7 @@ public abstract class Entity : MonoBehaviour, IDamageable
     //Damage Delay
     const float DamageDelay = 1.0f;
     float lastDamagedTime = 0.0f;
+    bool isDead = false;
 
     virtual protected void Awake()
     {
@@ -23,22 +25,38 @@ public abstract class Entity : MonoBehaviour, IDamageable
         }
     }
 
-    virtual public void TakeDamage(int amount)
+    virtual public void TakeDamage(int amount, bool ignoreCooldown = false)
     {
         Status Health = GetStatusByType(StatusType.Health);
         if (Health == null)
         {
             throw new FieldAccessException("No Health Status in Entity");
         }
-        if (Time.time - lastDamagedTime < DamageDelay)
+        if (!ignoreCooldown && Time.time - lastDamagedTime < DamageDelay)
             return;
-        lastDamagedTime = Time.time;
+        if(!ignoreCooldown)
+            lastDamagedTime = Time.time;
         Health.SubtractValue(amount);
         if (Health.curValue <= 0)
             OnDead();
     }
 
-    abstract public void OnDead();
+    virtual public void TakeHeal(int amount)
+    {
+        Status Health = GetStatusByType(StatusType.Health);
+        if (Health == null)
+        {
+            throw new FieldAccessException("No Health Status in Entity");
+        }
+        if (isDead)
+            return;
+        Health.AddValue(amount);
+    }
+
+    virtual public void OnDead()
+    {
+        isDead = true;
+    }
 
     public Status GetStatusByType(StatusType statusType)
     {

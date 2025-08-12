@@ -23,7 +23,7 @@ public class PlayerGrabber : MonoBehaviour, IGrab
 
     public IEnumerator OnGrabAction()
     {
-        player.controller.movementSpeedMultiplier = 0.8f;
+        player.controller.movementSpeed = player.controller.movementSpeed * 0.8f;
         while (isGrab)
         {
             if (grabObject != null)
@@ -38,7 +38,7 @@ public class PlayerGrabber : MonoBehaviour, IGrab
     public void OnGrabExit()
     {
         isGrab = false;
-        player.controller.movementSpeedMultiplier = 1.0f;
+        player.controller.movementSpeed = player.controller.movementSpeed * 1.25f;
         if (grabObject != null)
         {
             grabObject.GrabbedExitAction(player.controller.PlayerFowardMovement * throwForce * player.transform.forward);
