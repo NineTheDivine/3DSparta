@@ -51,17 +51,23 @@ public class PlayerController : MonoBehaviour
     //Input Actions
     public void OnMoveInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
+        if (PlayerManager.Instance.isUIAcvite)
+            return;
+        if (context.phase == InputActionPhase.Performed)
             currentMovementInput = context.ReadValue<Vector2>();
         else if (context.phase == InputActionPhase.Canceled)
             currentMovementInput = Vector2.zero;
     }
     public void OnLookInput(InputAction.CallbackContext context)
     {
+        if (PlayerManager.Instance.isUIAcvite)
+            return;
         mouseDelta = context.ReadValue<Vector2>();
     }
     public void OnJumpInput(InputAction.CallbackContext context)
     {
+        if (PlayerManager.Instance.isUIAcvite)
+            return;
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
             _rigidbody.AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
@@ -71,13 +77,22 @@ public class PlayerController : MonoBehaviour
     public void OnEnableInventory(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
+        {
             GetComponent<Player>().inventory.gameObject.SetActive(true);
+            PlayerManager.Instance.isUIAcvite = true;
+            currentMovementInput = Vector2.zero;
+            GetComponent<InteractionControl>().SetUIActive(true);
+        }
     }
 
     public void OnDisableInventory(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
+        {
             GetComponent<Player>().inventory.gameObject.SetActive(false);
+            PlayerManager.Instance.isUIAcvite = false;
+            GetComponent<InteractionControl>().SetUIActive(false);
+        }
     }
     //Input Actions End
 

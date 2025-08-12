@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
     public Player player;
+    public bool isUIAcvite = false;
 
     private void Awake()
     {

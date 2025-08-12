@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ public class InteractionControl : MonoBehaviour
     [Header("CrossHair")]
     [SerializeField] Transform UIParent;
     [SerializeField] Sprite crosshairImg;
+    RectTransform crosshair;
     Vector3 midPos;
     [Header("Interactables")]
     [SerializeField] LayerMask itemLayer;
@@ -25,7 +27,7 @@ public class InteractionControl : MonoBehaviour
     {
         grabber = GetComponent<IGrab>();
         cam = Camera.main;
-        RectTransform crosshair = new GameObject("CrossHairUI").AddComponent<RectTransform>();
+        crosshair = new GameObject("CrossHairUI").AddComponent<RectTransform>();
         crosshair.transform.SetParent(UIParent);
         crosshair.gameObject.AddComponent<Image>().sprite = crosshairImg;
         crosshair.gameObject.GetComponent<Image>().color = Color.red;
@@ -36,6 +38,8 @@ public class InteractionControl : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerManager.Instance.isUIAcvite)
+            return;
         if (Time.time - lastUpdate < UPDATEDELAY)
             return;
         lastUpdate = Time.time;
@@ -95,5 +99,10 @@ public class InteractionControl : MonoBehaviour
             if (currentInteractObject != null)
                 currentInteractObject.OnInteract();
         }
+    }
+
+    public void SetUIActive(bool active)
+    {
+        crosshair.gameObject.SetActive(active);
     }
 }
