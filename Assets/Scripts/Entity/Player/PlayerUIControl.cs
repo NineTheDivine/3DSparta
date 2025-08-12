@@ -6,11 +6,12 @@ using UnityEngine;
 public class PlayerUIControl : MonoBehaviour
 {
     Canvas PlayerStatusParent;
-    [SerializeField]StatusUI playerStatusUIPrefab;
+    [SerializeField] StatusUI playerStatusUIPrefab;
+    [SerializeField] PlayerInventory playerInventoryPrefab;
 
     public void Init()
     {
-        Player player = PlayerManager.Instance.player;
+        Player player = transform.parent.GetComponent<Player>();
         PlayerStatusParent = new GameObject("PlayerStatusUI").AddComponent<Canvas>();
         PlayerStatusParent.transform.SetParent(transform);
         if (!PlayerStatusParent.TryGetComponent<RectTransform>(out RectTransform rect))
@@ -24,5 +25,7 @@ public class PlayerUIControl : MonoBehaviour
             StatusUI statusUI = Instantiate(playerStatusUIPrefab, PlayerStatusParent.transform);
             statusUI.Init(player);
         }
+        player.inventory = Instantiate(playerInventoryPrefab, this.transform);
+        player.inventory.gameObject.SetActive(false);
     }
 }

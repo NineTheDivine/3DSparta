@@ -26,9 +26,10 @@ public class BasicBox : MonoBehaviour, IGrabable
         rb.position = grabberpos + Vector3.up  + angle * grabDistance;
     }
 
-    public void GrabbedExitAction()
+    public void GrabbedExitAction(Vector3 throwForce)
     {
         if(rb.isKinematic)
             rb.isKinematic = false;
+        rb.AddForce(throwForce, ForceMode.Impulse);
     }
 }

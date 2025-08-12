@@ -11,22 +11,24 @@ public class PlayerManager : MonoBehaviour
         {
             if (_playerManager == null)
             {
+                Debug.Log("Call");
                 _playerManager = new GameObject("PlayerManager").AddComponent<PlayerManager>();
             }
             return _playerManager;
         }
     }
     public Player player;
+    public bool isUIAcvite = false;
 
     private void Awake()
     {
-        if (_playerManager = null)
+        if (_playerManager == null)
         {
             _playerManager = this;
+            
             DontDestroyOnLoad(gameObject);
         }
         else if (_playerManager != this)
             Destroy(gameObject);
     }
-    
 }

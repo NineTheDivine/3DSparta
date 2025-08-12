@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class InteractionControl : MonoBehaviour
 {
-    Player player;
+    IGrab grabber;
     const float UPDATEDELAY = 0.05f;
     float lastUpdate = 0.0f;
     const float DETECTDISTANCE = 1.0f;
@@ -14,17 +15,19 @@ public class InteractionControl : MonoBehaviour
     [Header("CrossHair")]
     [SerializeField] Transform UIParent;
     [SerializeField] Sprite crosshairImg;
+    RectTransform crosshair;
     Vector3 midPos;
     [Header("Interactables")]
     [SerializeField] LayerMask itemLayer;
     IGrabable currentGrabable;
+    IInteractable currentInteractObject;
     
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        grabber = GetComponent<IGrab>();
         cam = Camera.main;
-        RectTransform crosshair = new GameObject("CrossHairUI").AddComponent<RectTransform>();
+        crosshair = new GameObject("CrossHairUI").AddComponent<RectTransform>();
         crosshair.transform.SetParent(UIParent);
         crosshair.gameObject.AddComponent<Image>().sprite = crosshairImg;
         crosshair.gameObject.GetComponent<Image>().color = Color.red;
@@ -35,6 +38,8 @@ public class InteractionControl : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerManager.Instance.isUIAcvite)
+            return;
         if (Time.time - lastUpdate < UPDATEDELAY)
             return;
         lastUpdate = Time.time;
@@ -43,40 +48,61 @@ public class InteractionControl : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, DETECTDISTANCE, itemLayer))
         {
-            if (hit.collider.gameObject.TryGetComponent<IGrabable>(out IGrabable target))
+            if (hit.collider.gameObject.TryGetComponent<IGrabable>(out IGrabable grabtarget))
             {
-                if (target != currentGrabable)
-                    currentGrabable = target;
+                if (grabtarget != currentGrabable)
+                    currentGrabable = grabtarget;
             }
             else
-            {
                 currentGrabable = null;
+            if (hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable itemtarget))
+            {
+                if (itemtarget != currentInteractObject)
+                    currentInteractObject = itemtarget;
             }
+            else
+                currentInteractObject = null;
         }
         else
         {
             currentGrabable = null;
+            currentInteractObject = null;
         }
     }
 
-    public void OnInteractionInput(InputAction.CallbackContext context)
+    public void OnGrabInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
         {
             //Set Player Grab mode
-            player.ActiveGrab(true);
+            grabber.OnGrabEnter();
             //If current Interactable is not null, Grab
-            if(player.grabObject == null && currentGrabable != null)
-                player.grabObject = currentGrabable;
+            if(grabber.grabObject == null && currentGrabable != null)
+                grabber.grabObject = currentGrabable;
         }
-        else if (player.grabObject == null && currentGrabable != null && context.phase == InputActionPhase.Performed)
+        else if (grabber.grabObject == null && currentGrabable != null && context.phase == InputActionPhase.Performed)
         {
-            player.grabObject= currentGrabable;
+            grabber.grabObject= currentGrabable;
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             //End Player Grab mode
-            player.ActiveGrab(false);
+            grabber.OnGrabExit();
         }
+    }
+
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            //If current Interactable is not null, add to Inventory
+            if (currentInteractObject != null)
+                currentInteractObject.OnInteract();
+        }
+    }
+
+    public void SetUIActive(bool active)
+    {
+        crosshair.gameObject.SetActive(active);
     }
 }
