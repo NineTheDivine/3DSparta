@@ -2,22 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumperTop : MonoBehaviour
+public class JumperTop : PlatformTrigger
 {
     Material jumperTopMaterial;
     Animator jumperTopAnimator;
-    Collider jumperTopCollider;
+    public Vector3 force;
     Color reloadColor;
-    List<Rigidbody> collidingObjects = new List<Rigidbody>();
 
-    private void Start()
+    protected override void Start()
     {
         jumperTopMaterial = GetComponent<MeshRenderer>().materials[0];
         reloadColor = jumperTopMaterial.color;
         jumperTopAnimator = GetComponent<Animator>();
-        jumperTopCollider = GetComponent<Collider>();
+        base.Start();
     }
-    public void JumpPadAction(Vector3 force)
+    public override void OnAction()
     {
         jumperTopAnimator.SetBool("Jump", true);
         jumperTopMaterial.color = Color.gray;
@@ -35,24 +34,6 @@ public class JumperTop : MonoBehaviour
     public void ReloadJumper()
     {
         jumperTopMaterial.color = reloadColor;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
-        {
-            if (!collidingObjects.Contains(rb))
-                collidingObjects.Add(rb);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
-        {
-            if (collidingObjects.Contains(rb))
-                collidingObjects.Remove(rb);
-        }
     }
 }
 
