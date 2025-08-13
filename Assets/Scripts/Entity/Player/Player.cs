@@ -7,7 +7,7 @@ public class Player : Entity, IAttackable
     [HideInInspector] public PlayerController controller;
     public PlayerUIControl playerUIControl;
     [HideInInspector] public IGrab playerGrabber;
-     public PlayerInventory inventory;
+    public PlayerInventory inventory;
     
 
     override protected void Awake()

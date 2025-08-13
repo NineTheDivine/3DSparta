@@ -18,6 +18,7 @@ public class JumpPad : MonoBehaviour
     private void Awake()
     {
         jumpForce = jumpForce.normalized * jumpPower;
+        jumperTop.force = jumpForce;
         isActivate = false;
     }
 
@@ -34,7 +35,7 @@ public class JumpPad : MonoBehaviour
         {
             lastJumpTime = Time.time;
             isActivate = true;
-            jumperTop.JumpPadAction(jumpForce);
+            jumperTop.OnAction();
         }
     }
 

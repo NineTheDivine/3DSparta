@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Map
   - Interactable
+  - Platform
   layers:
   - Default
   - TransparentFX
